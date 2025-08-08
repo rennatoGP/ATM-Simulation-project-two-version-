@@ -1,0 +1,108 @@
+from datetime import datetime
+
+def login_screen(correct_username, correct_password, max_attempts=3):
+    print("🏦 ATM LOGIN SCREEN")
+    print("-" * 30)
+    attempts_left = max_attempts
+
+    while attempts_left > 0:
+        username = input("Username: ")
+        password = input("Password: ")
+
+        if username.lower() == correct_username.lower() and password == correct_password:
+            print("\n✅ Login successful. Welcome.")
+            return True
+        else:
+            attempts_left -= 1
+            print(f"❌ Incorrect login. Remaining attempts: {attempts_left}\n")
+
+    print("🚫 Too many incorrect attempts. Your card has been blocked.\n")
+    return False
+
+def select_operation():
+    while True:
+        choice = input("Select an operation (1-5): \n"
+                       "1 - View Balance\n"
+                       "2 - Withdraw Money\n"
+                       "3 - Deposit Money\n"
+                       "4 - View Transaction Log\n"
+                       "5 - Exit\n")
+        if choice in ["1", "2", "3", "4", "5"]:
+            return choice
+        else:
+            print("Invalid operation! Please try again.")
+
+def view_balance(balance):
+    print(f"Your current balance is: {balance} TL")
+
+def withdraw_money(balance):
+    while True:
+        try:
+            amount = float(input("Enter the amount you want to withdraw: "))
+            if amount <= 0:
+                print("Please enter an amount greater than zero.")
+            elif amount > balance:
+                print("Insufficient balance.")
+            else:
+                balance -= amount
+                timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                with open("transaction_log.txt", "a") as file:
+                    file.write(f"[{timestamp}] Withdrawn: {amount} TL\n")
+                print("Preparing your cash. Please wait...")
+                print("You can take your money.")
+                view_balance(balance)
+                return balance
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+
+def deposit_money(balance):
+    while True:
+        try:
+            amount = float(input("Enter the amount you want to deposit: "))
+            if amount <= 0:
+                print("Please enter an amount greater than zero.")
+            else:
+                balance += amount
+                timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                with open("transaction_log.txt", "a") as file:
+                    file.write(f"[{timestamp}] Deposited: {amount} TL\n")
+                print("Please insert your money into the deposit unit.")
+                print("Verifying the deposit. Please wait...")
+                print("Deposit completed successfully.")
+                view_balance(balance)
+                return balance
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+
+def show_transaction_log():
+    try:
+        with open("transaction_log.txt", "r") as file:
+            for line in file:
+                print(line.strip())
+    except FileNotFoundError:
+        print("No transaction log found.")
+
+def main():
+    username = "sarah whilson"
+    password = "564310"
+    balance = 2000
+
+    if not login_screen(username, password):
+        return
+
+    while True:
+        choice = select_operation()
+        if choice == "1":
+            view_balance(balance)
+        elif choice == "2":
+            balance = withdraw_money(balance)
+        elif choice == "3":
+            balance = deposit_money(balance)
+        elif choice == "4":
+            show_transaction_log()
+        elif choice == "5":
+            print("Logging out... Have a nice day.")
+            break
+
+if _name_ == "_main_":
+    main()
