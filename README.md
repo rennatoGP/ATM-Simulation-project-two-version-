@@ -1,4 +1,6 @@
 # ATM-Simulation-project-two-version-
+<img width="416" height="416" alt="image" src="https://github.com/user-attachments/assets/c975b665-51de-45c0-8698-427ae82863c2" />
+
 # 🏧 ATM Simulation Project (Two Versions)
 
 Welcome to the *ATM Simulation Project*, a beginner-friendly Python project that simulates the core functions of an ATM. This project was developed in two versions to illustrate the evolution from basic scripting to more structured and modular programming using functions.
