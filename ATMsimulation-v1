@@ -1,0 +1,73 @@
+import getpass
+
+correct_password = 84325
+
+while True:
+    print("Please insert your card...")
+    max_attempts = 3
+    attempt_count = 0
+
+    while attempt_count < max_attempts:
+        try:
+            password_input = int(getpass.getpass("Please enter your password: "))
+        except ValueError:
+            print("Please enter numbers only.")
+            continue
+
+        if correct_password == password_input:
+            print("Login successful.")
+            break
+        else:
+            attempt_count += 1
+            print(f"Incorrect password. Remaining attempts: {max_attempts - attempt_count}")
+
+    if attempt_count == max_attempts:
+        print("Too many attempts. Access blocked.")
+        exit()
+
+    balance = 2000
+
+    while True:
+        print("Current balance:", balance)
+        operation = input("Please enter the number of the operation you want to perform:\n"
+                          "1 - Withdraw money\n"
+                          "2 - Deposit money\n"
+                          "3 - Card information\n"
+                          "4 - Return card\n")
+
+        if operation == "1":
+            try:
+                withdraw_amount = int(input("Enter the amount you want to withdraw: "))
+            except ValueError:
+                print("Please enter numbers only.")
+                continue
+
+            if balance >= withdraw_amount:
+                print("Your money is being prepared. Please wait...")
+                balance -= withdraw_amount
+                print("You can take your money.")
+                print("Current balance:", balance)
+            else:
+                print("Insufficient balance. Please enter a valid amount.")
+
+        elif operation == "2":
+            try:
+                deposit_amount = int(input("Enter the amount you want to deposit: "))
+            except ValueError:
+                print("Please enter numbers only.")
+                continue
+
+            print("Please insert your money into the deposit unit.")
+            print("Your money is being deposited. Please wait...")
+            balance += deposit_amount
+            print("Current balance:", balance)
+
+        elif operation == "3":
+            print("Cardholder: Jack Willson,\tCard Number: 5234 8912 4501 6739,\tExpiry: 07/28,\tCVV: 317,\tBank: Sugar Bank")
+
+        elif operation == "4":
+            print("Returning your card...")
+            break
+
+        else:
+            print("Invalid operation. Please try again.")
